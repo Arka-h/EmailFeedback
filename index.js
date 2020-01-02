@@ -5,7 +5,7 @@ const app = express(); //returns app  object
 app.get("/", (req, res) => {// req ==>  request from the client
     // res ==> response that you will send out to the client
   res.send({
-    hi: "there"
+    bye: "buddy"
   });
 });
 // Get env variable PORT from env on which Node runs, and Heroku modifies/creates
