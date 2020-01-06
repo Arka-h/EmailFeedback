@@ -18,12 +18,13 @@ passport.deserializeUser((id, done) => {
 });
 
 passport.use(
-  new googleStrategy(
+  new googleStrategy( //since heroku uses a proxy to handle redirect pages, "https==>http"
     {
       // pass a config object
       clientID: googleClientID,
       clientSecret: googleClientSecret,
-      callbackURL: "/auth/google/callback"
+      callbackURL: "/auth/google/callback",
+      proxy:true
     }, //pass a callback function provided with (accessToken, refreshToken, profile, done)=>{}
     (accessToken, refreshToken, profile, done) => {
       //done() is a function
