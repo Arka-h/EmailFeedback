@@ -1,0 +1,39 @@
+https://git.heroku.com/morning-sea-25305.git : git remote add heroku [git_link]
+// >>>> means that add a remote git repo and call the branch heroku..
+// >>>> then push your project repo to heroku
+https://morning-sea-25305.herokuapp.com/ 
+
+morning-sea-25305
+
+>> heroku logs show the changes on heroku
+
+>>>> We'll use the OAuth authentication standard
+>>>> Helper library that helps in the OAuth process ==> Passport.js
+
+>>>> Create a profile with google and enaable G+ API for the Oauth feature
+>>>> Generate Client ID and Password : 
+//identifies our application with google and can be shared
+
+>>>> When we setup our Oauth flow, we can't redirect users to random pages, and hence,
+     callback page must be recorded with google dev console account
+>>>> We are using the remotely hosted instance of MongoDB, called (MongoDB Atlas)
+     as opposed to the version running in the local device ----> mLab (now under MongoDB)
+
+----------------------------------------end of log 1---------------------------------------
+
+>>>> We now install mongoose that is used to represent the MongoDB 
+     collection as an object in JS env 
+>>>> To save the created insstancce in the collection called users, in our mongoDB Atlas account,
+     load mongo model by mongoose.model("colectionName")
+     we connect to it, and in the passport strategy, use the profile, done para's to extract userInfo 
+     from passport auth, and compare/add to db, to validate/add user to the db.
+>>>> After updating the DB, we define serialize and deserialize functions, 
+     to mention the unique info to be passed to browser for registry
+>>>> We tell passport to use cookies to handle these tokens, defined by serialize and deserialize,
+     use npm install --save cookie-session
+>>>> Passport now knows how to serialize/deserialize tokens/cookies, hence middlewares are used 
+     to wrap up requests before they reach our server main logic, like a preprocesing for every 
+     request
+     >>>> the middlewares aare wired up using app.use(<Middleware Instance>)
+>>>> The express-session module, helps you store as much data in your cookie as possible, by keeping 
+     the required session data in the mongoDB server. Whereas cookie-session has limit of like 4kb

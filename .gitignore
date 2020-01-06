@@ -1,2 +1,6 @@
+# stuff that gets installed in the remote heroku server
 node_modules
-config
+# private info for dev purposes
+dev.js
+# all previous logs of index.js...
+index_log1.js
