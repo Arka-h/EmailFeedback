@@ -4,3 +4,5 @@ node_modules
 dev.js
 # all previous logs of index.js...
 index_log1.js
+# prev version of passport
+passport_then.js

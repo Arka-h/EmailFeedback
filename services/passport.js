@@ -24,23 +24,22 @@ passport.use(
       clientID: googleClientID,
       clientSecret: googleClientSecret,
       callbackURL: "/auth/google/callback",
-      proxy:true
+      proxy: true
     }, //pass a callback function provided with (accessToken, refreshToken, profile, done)=>{}
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       //done() is a function
-      User.findOne({
-        //async func returns a JS promise for
-        // synchronous access of other asynchronous processes by
-        // .then(callback:<function>)
-        googleID: profile.id
-      }).then(existingUser => {
-        if (!existingUser) {
-          new User({ googleID: profile.id })
-            .save() //async func
-            .then(user => done(null, user)); //new saved User // needs  session cookie sset-cookie
-        }
+
+      //async func returns a JS promise for
+      // synchronous access of other asynchronous processes by
+      // .then(callback:<function>)
+      //for better readability we use async await syntax
+      const existingUser = await User.findOne({ googleID: profile.id });
+      if (!existingUser) {
+        const user = await new User({ googleID: profile.id }).save(); //async func
+        done(null, user); //new saved User // needs  session cookie sset-cookie
+      } 
+      else 
         done(null, existingUser);
-      });
     }
   )
   //saves the model instance to the model-class
