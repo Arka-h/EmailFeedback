@@ -61,3 +61,8 @@ morning-sea-25305
      'thunk' responsible for making dispatch functions to store and 
      needs to be passed as a Middleware
 >>>> Class based component has life cycle methods that can be used to call action creator, for <App>
+---------------------------------------------------------------------------------------------------
+>>>> Adding Stripe plugin for front end form and its interaction with the Stripe API..
+     Library name : react-stripe-checkout
+     frontend needs the publishable key of stripe, and the bckend needs both the publishable and secret keys
+>>>> REACT_ENV_name
