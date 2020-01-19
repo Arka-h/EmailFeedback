@@ -66,3 +66,39 @@ morning-sea-25305
      Library name : react-stripe-checkout
      frontend needs the publishable key of stripe, and the bckend needs both the publishable and secret keys
 >>>> REACT_ENV_name
+     https://github.com/azmenak/react-stripe-checkout/blob/master/package.jsons
+     test card number 4242 4242 4242 4242 junk@email.com 
+     card:
+        address_city: null
+        address_country: null
+        address_line1: null
+        address_line1_check: null
+        address_line2: null
+        address_state: null
+        address_zip: null
+        address_zip_check: null
+        brand: "Visa"
+        country: "US"
+        cvc_check: "pass"
+        dynamic_last4: null
+        exp_month: 12
+        exp_year: 2022
+        funding: "credit"
+        id: "card_1G2MLGBDYKSTeUmPhVpMyGCy"
+        last4: "4242"
+        metadata: {}
+        name: "svdvhjvg@jhd.com"
+        object: "card"
+        tokenization_method: null
+        __proto__: Object
+        client_ip: "223.182.179.25"
+        created: 1579373299
+        email: "svdvhjvg@jhd.com"
+        id: "tok_1G2MLHBDYKSTeUmPE61Q7x9Z"
+        livemode: false
+        object: "token"
+        type: "card"
+        used: false
+        __proto__: Object
+>>>> 
+​

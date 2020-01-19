@@ -6,10 +6,10 @@ import { createStore, applyMiddleware } from "redux";
 // createStore creates a store to maintain state of the application
 import App from "./components/App";
 import reducers from "./reducers";
-import reduxThunk from "redux-thunk"
+import reduxThunk from "redux-thunk";
 
 const store = createStore(
-  reducers /*()=>{reducerFunction }*/,
+  reducers,
   {
     /*Enhancer */
   },
@@ -22,4 +22,4 @@ ReactDOM.render(
   document.querySelector("#root")
 );
 console.log(`STRIPE KEY IS ${process.env.REACT_APP_STRIPE_KEY}`);
-console.log(`Environment is ${process.env.NODE_ENV}`)
+console.log(`Environment is ${process.env.NODE_ENV}`);

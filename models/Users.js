@@ -2,12 +2,11 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const MongoURI = require("../config/keys").MongoURI;
-  
+
 mongoose
-  .connect(MongoURI
-, {
-    useNewUrlParser:true,
-    useUnifiedTopology:true,
+  .connect(MongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
   })
   .catch(error => {
     console.log(JSON.stringify(error));
@@ -18,6 +17,6 @@ mongoose
 const userSchema = new Schema({
   googleID: String
 });
-mongoose.model("users", userSchema); //creates a model class...
-//TODO : mongoose.model() returns a class whenn there is 1 arg
-//TODO : mongoose.model() inserts a class when there are 2 args
+const User = mongoose.model("users", userSchema); //creates a User model
+
+module.exports = User;

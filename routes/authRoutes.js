@@ -10,11 +10,11 @@ module.exports = app => {
   app.get("/api/logout", (req, res) => {
     //logout is attached to req by passport
     req.logout();
-    res.send(req.user);
+    res.redirect('/');
   });
   app.get("/api/current_user", (req, res) => {
     //user is attached to req by passport
-    // res.send(req.session)
+    console.log(req.user);
     res.send(req.user);
   });
 };
