@@ -6,3 +6,6 @@ dev.js
 index_log1.js
 # prev version of passport
 passport_then.js
+# Information regarding Google Creds
+client_secret.json
+keys.js
