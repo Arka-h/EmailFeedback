@@ -8,4 +8,5 @@ index_log1.js
 passport_then.js
 # Information regarding Google Creds
 client_secret.json
+env.json
 keys.js
