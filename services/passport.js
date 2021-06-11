@@ -4,12 +4,12 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy
 const keys = require("../config/keys")
 
 // Store id as token (for now)
-passport.serializeUser((user, done) => { console.log("serialize", user); done(null, user.id) }) 
+passport.serializeUser((user, done) => { console.log("serialize", user); done(null, user.id) })
 
 // Get the corresponding user from token
 passport.deserializeUser(async (token, done) => {
-    console.log("deserialize", token);
-    const user = await User.findById(token) 
+    // console.log("deserialize", token);
+    const user = await User.findById(token)
     done(null, user)
 })
 

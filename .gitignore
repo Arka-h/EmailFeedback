@@ -1,12 +1,13 @@
 # stuff that gets installed in the remote heroku server
 node_modules
+
 # private info for dev purposes
-dev.js
+# dev.js
 # all previous logs of index.js...
-index_log1.js
+# index_log1.js
 # prev version of passport
-passport_then.js
-# Information regarding Google Creds
-client_secret.json
-env.json
-keys.js
+# passport_then.js
+
+# Critical Information
+.env
+client_secret*.json
