@@ -9,7 +9,7 @@ const cookieSession = require('cookie-session')
 const authRouter = require('./routes/authRoutes')
 const { mongoURI, cookieKey } = require('./config/keys')
 require('./services/passport') // Setup passport config : Strategy, serialize and deserialize logic
-
+if (process.env.NODE_ENV !== 'production') require('dotenv').config() // For link on '/'
 // SET UP DATABASE
 mongoose.connect(mongoURI, // Get the keys and set wire up the remote DB
     { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
@@ -30,7 +30,7 @@ app.use(passport.session())
 app.use(authRouter) // Wire up the Auth flow
 
 app.get('/', (req, res) => {
-    res.send("Check out localhost:5000/auth/google")
+    res.send(process.env.NODE_ENV === 'production' ? "Check out https://email-feedback-0.herokuapp.com/auth/google" : "Check out localhost:5000/auth/google")
 })
 
 // Get env from Heroku's Cloud env || assign 5000
