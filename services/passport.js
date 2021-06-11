@@ -17,7 +17,9 @@ passport.use(
     new GoogleStrategy({
         clientID: keys.googleId,
         clientSecret: keys.googleSecret,
-        callbackURL: '/auth/google/callback' // Flow of getting permission starts here
+        callbackURL: '/auth/google/callback', // Flow of getting permission starts here
+        proxy: true // trust proxies, cause heroku server is hosted on a proxy 
+        // (makes link http:// since proxies are by default untrustworthy)
     },
         async (accessToken, refreshToken, profile, done) => { // After redirection from callback, 
             // we get response from google with tokens and profile info
