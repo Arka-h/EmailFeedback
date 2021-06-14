@@ -1,21 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-
-
-import * as actions from '../actions'
+import NewSurvey from './NewSurvey'
+import Dashboard from './Dashboard'
+import Landing from './Landing'
+import { fetchUser } from '../actions'
 import Header from './Header'
-const Landing = () => <h1>Landing</h1>
-const Dashboard = () => <h1>Dashboard</h1>
-const New = () => <h1>New</h1>
 
 const App = (props) => {
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(actions.fetchUser) 
+        dispatch(fetchUser()) 
     }, [])
-    // console.log(user)
     return (
         <>
             <BrowserRouter>
@@ -24,11 +21,10 @@ const App = (props) => {
                     <Header />
                     <Route exact path='/' component={Landing} />
                     <Route exact path='/surveys' component={Dashboard} />
-                    <Route exact path='/surveys/new' component={New} />
+                    <Route exact path='/surveys/new' component={NewSurvey} />
                 </div>
             </BrowserRouter>
         </>
     )
 }
-
 export default App

@@ -5,10 +5,13 @@ if (process.env.NODE_ENV !== 'production') // Heroku : https://devcenter.heroku.
 const {
     GCLIENT_ID, GCLIENT_SECRET,
     MONGO_ADMIN, MONGO_PASSWD, MONGO_PROJECT, DB_NAME,
-    COOKIE_KEY } = process.env
+    COOKIE_KEY,
+    STRIPE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY } = process.env
 module.exports = {
     googleId: GCLIENT_ID,
     googleSecret: GCLIENT_SECRET,
     mongoURI: `mongodb+srv://${MONGO_ADMIN}:${MONGO_PASSWD}@cluster0.${MONGO_PROJECT}.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
-    cookieKey: COOKIE_KEY
+    cookieKey: COOKIE_KEY,
+    stripePublishableKey: STRIPE_PUBLISHABLE_KEY,
+    stripeSecretKey: STRIPE_SECRET_KEY
 }
