@@ -31,9 +31,7 @@ app.use(passport.session())
 app.use(authRouter) // Wire up the Auth flow
 app.use(billRouter)
 
-// app.get('/', (req, res) => {
-//     res.send(process.env.NODE_ENV === 'production' ? "Check out https://email-feedback-0.herokuapp.com/auth/google" : "Check out localhost:5000/auth/google")
-// })
+// https://devcenter.heroku.com/articles/nodejs-support#customizing-the-build-process
 
 // Handle Production build 
 if(process.env.NODE_ENV === 'production'){
