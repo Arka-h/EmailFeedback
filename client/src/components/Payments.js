@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import StripeCheckout from 'react-stripe-checkout'
 import { handleToken } from '../actions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDollarSign, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faDollarSign } from '@fortawesome/free-solid-svg-icons'
 
 const Payments = () => {
     const dispatch = useDispatch()
