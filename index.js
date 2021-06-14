@@ -31,9 +31,22 @@ app.use(passport.session())
 app.use(authRouter) // Wire up the Auth flow
 app.use(billRouter)
 
-app.get('/', (req, res) => {
-    res.send(process.env.NODE_ENV === 'production' ? "Check out https://email-feedback-0.herokuapp.com/auth/google" : "Check out localhost:5000/auth/google")
-})
+// app.get('/', (req, res) => {
+//     res.send(process.env.NODE_ENV === 'production' ? "Check out https://email-feedback-0.herokuapp.com/auth/google" : "Check out localhost:5000/auth/google")
+// })
+
+// Handle Production build 
+if(process.env.NODE_ENV === 'production'){
+    // Express will serve up production assets
+    // like main.js or main.css files
+    app.use(express.static('client/build')) // If searching for static assets
+
+    // It'll serve up index.html, if route is not understood
+    const path = require('path')
+    app.get('*',(res, req) =>{
+        res.sendFile(path.resolve(__dirname,'client','build','index.html')) // concats it's params--> Absoulte path
+    })
+}
 
 // Get env from Heroku's Cloud env || assign 5000
 // For Heroku deployment, add the engines prop with npm and node attributes set to version
