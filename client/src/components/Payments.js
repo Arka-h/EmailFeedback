@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import StripeCheckout from 'react-stripe-checkout'
 import { handleToken } from '../actions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDollarSign } from '@fortawesome/free-solid-svg-icons'
+import { faMoneyBillWave } from '@fortawesome/free-solid-svg-icons'
 
 const Payments = () => {
     const dispatch = useDispatch()
@@ -13,7 +13,7 @@ const Payments = () => {
         amount={100}
         token={token => dispatch(handleToken(token))} // Thunk allows us to use wrapper function, to send arguments to the dispatch function
         stripeKey={process.env.REACT_APP_STRIPE_KEY}>
-        <button className="btn" style={{borderRadius:"40%", verticalAlign:"middle"}}> <FontAwesomeIcon icon={faDollarSign} size="lg" /> </button>
+        <Link> <FontAwesomeIcon icon={faMoneyBillWave} size="lg" /> </Link>
     </StripeCheckout>
 }
 export default Payments

@@ -50,11 +50,7 @@ surveyRouter.post("/api/createSurvey", requireLogin, requireCredits, function _c
         case 8:
           // Mailer
           mailer = new Mailer(survey, surveyTemplate(survey));
-          mailer.sendMail({
-            recipients: [{
-              email: 'arka.haldi@spit.ac.in'
-            }]
-          });
+          mailer.sendMail();
 
         case 10:
         case "end":

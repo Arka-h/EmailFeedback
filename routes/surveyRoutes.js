@@ -28,7 +28,7 @@ surveyRouter.post("/api/createSurvey", requireLogin, requireCredits, async (req,
 
     // Mailer
     const mailer = new Mailer(survey, surveyTemplate(survey))
-    mailer.sendMail({ recipients: [{ email: 'arka.haldi@spit.ac.in' }] })
+    mailer.sendMail()
 })
 
 module.exports = surveyRouter
