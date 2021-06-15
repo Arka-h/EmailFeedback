@@ -12,6 +12,8 @@ var cookieSession = require('cookie-session'); // IMPORTS FROM OTHER MODULES
 
 var authRouter = require('./routes/authRoutes');
 
+var surveyRouter = require('./routes/surveyRoutes');
+
 var billRouter = require('./routes/billRoutes');
 
 var _require = require('./config/keys'),
@@ -46,7 +48,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(authRouter); // Wire up the Auth flow
 
-app.use(billRouter); // https://devcenter.heroku.com/articles/nodejs-support#customizing-the-build-process
+app.use(billRouter);
+app.use(surveyRouter); // https://devcenter.heroku.com/articles/nodejs-support#customizing-the-build-process
 // Handle Production build 
 
 if (process.env.NODE_ENV === 'production') {

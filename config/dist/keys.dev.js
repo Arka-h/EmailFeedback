@@ -12,12 +12,14 @@ var _process$env = process.env,
     DB_NAME = _process$env.DB_NAME,
     COOKIE_KEY = _process$env.COOKIE_KEY,
     STRIPE_PUBLISHABLE_KEY = _process$env.STRIPE_PUBLISHABLE_KEY,
-    STRIPE_SECRET_KEY = _process$env.STRIPE_SECRET_KEY;
+    STRIPE_SECRET_KEY = _process$env.STRIPE_SECRET_KEY,
+    SENDGRID_KEY = _process$env.SENDGRID_KEY;
 module.exports = {
   googleId: GCLIENT_ID,
   googleSecret: GCLIENT_SECRET,
   mongoURI: "mongodb+srv://".concat(MONGO_ADMIN, ":").concat(MONGO_PASSWD, "@cluster0.").concat(MONGO_PROJECT, ".mongodb.net/").concat(DB_NAME, "?retryWrites=true&w=majority"),
   cookieKey: COOKIE_KEY,
   stripePublishableKey: STRIPE_PUBLISHABLE_KEY,
-  stripeSecretKey: STRIPE_SECRET_KEY
+  stripeSecretKey: STRIPE_SECRET_KEY,
+  sendGridKey: SENDGRID_KEY
 };

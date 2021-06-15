@@ -1,4 +1,3 @@
-
 // MODULES
 const express = require('express')
 const mongoose = require('mongoose')
@@ -6,6 +5,7 @@ const passport = require('passport')
 const cookieSession = require('cookie-session')
 // IMPORTS FROM OTHER MODULES
 const authRouter = require('./routes/authRoutes')
+const surveyRouter = require('./routes/surveyRoutes')
 const billRouter = require('./routes/billRoutes')
 const { mongoURI, cookieKey } = require('./config/keys')
 require('./services/passport') // Setup passport config : Strategy, serialize and deserialize logic
@@ -29,7 +29,8 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(authRouter) // Wire up the Auth flow
-app.use(billRouter)
+app.use(billRouter) 
+app.use(surveyRouter)
 
 // https://devcenter.heroku.com/articles/nodejs-support#customizing-the-build-process
 

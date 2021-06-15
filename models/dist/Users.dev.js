@@ -3,7 +3,10 @@
 var mongoose = require('mongoose');
 
 var Users = new mongoose.Schema({
-  googleId: String,
+  googleId: {
+    type: String,
+    required: true
+  },
   credits: {
     type: Number,
     "default": 500

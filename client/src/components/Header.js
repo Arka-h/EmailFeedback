@@ -15,7 +15,6 @@ export default function Header(props) {
                 <Link to={auth ? "/surveys" : "/"} className="brand-logo">EmailFeedback</Link>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     {auth ? <>
-                        <li><Link to="/">Landing</Link></li>
                         <li><Link to="/surveys">Dashboard</Link></li>
                         <li><Link to="/surveys/new">New</Link></li> {/* Handled by ReactRouter */}
                         <li>Credits: {auth.credits} &nbsp;</li>

@@ -6,12 +6,14 @@ const {
     GCLIENT_ID, GCLIENT_SECRET,
     MONGO_ADMIN, MONGO_PASSWD, MONGO_PROJECT, DB_NAME,
     COOKIE_KEY,
-    STRIPE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY } = process.env
+    STRIPE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY,
+    SENDGRID_KEY,} = process.env
 module.exports = {
     googleId: GCLIENT_ID,
     googleSecret: GCLIENT_SECRET,
     mongoURI: `mongodb+srv://${MONGO_ADMIN}:${MONGO_PASSWD}@cluster0.${MONGO_PROJECT}.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
     cookieKey: COOKIE_KEY,
     stripePublishableKey: STRIPE_PUBLISHABLE_KEY,
-    stripeSecretKey: STRIPE_SECRET_KEY
+    stripeSecretKey: STRIPE_SECRET_KEY,
+    sendGridKey: SENDGRID_KEY,
 }
