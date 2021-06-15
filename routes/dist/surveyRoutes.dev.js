@@ -25,12 +25,14 @@ surveyRouter.post("/api/createSurvey", requireLogin, requireCredits, function _c
           // recipients has list of recipientEmails
           _req$body = req.body, title = _req$body.title, subject = _req$body.subject, body = _req$body.body, recipients = _req$body.recipients, response = _req$body.response; // Assume response is a list of response arrays
 
-          r = {};
+          r = {}; //atleast
+
           if (response) response.map(function (prop) {
             r[prop] = 0;
           }); // create a doc out of list of response strings added
 
-          survey = new Survey({
+          _context.next = 5;
+          return regeneratorRuntime.awrap(new Survey({
             title: title,
             subject: subject,
             body: body,
@@ -38,15 +40,23 @@ surveyRouter.post("/api/createSurvey", requireLogin, requireCredits, function _c
             response: r,
             _user: req.user,
             dateSent: Date.now()
-          }); // await survey.save()
-          // const status = await Survey.find()
+          }));
 
-          console.log("survey", survey); // Mailer
+        case 5:
+          survey = _context.sent;
+          _context.next = 8;
+          return regeneratorRuntime.awrap(survey.save());
 
+        case 8:
+          // Mailer
           mailer = new Mailer(survey, surveyTemplate(survey));
-          mailer.send();
+          mailer.sendMail({
+            recipients: [{
+              email: 'arka.haldi@spit.ac.in'
+            }]
+          });
 
-        case 7:
+        case 10:
         case "end":
           return _context.stop();
       }

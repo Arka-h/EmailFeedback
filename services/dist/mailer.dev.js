@@ -18,16 +18,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var sendgrid = require('sendgrid');
-
-var helper = sendgrid.mail;
+var _require = require('@sendgrid/mail'),
+    MailService = _require.MailService;
 
 var keys = require('../config/keys');
 
 var Mailer =
 /*#__PURE__*/
-function (_helper$Mail) {
-  _inherits(Mailer, _helper$Mail);
+function (_MailService) {
+  _inherits(Mailer, _MailService);
 
   function Mailer(_ref, content) {
     var _this;
@@ -37,67 +36,56 @@ function (_helper$Mail) {
 
     _classCallCheck(this, Mailer);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Mailer).call(this));
-    _this.sgApi = sendgrid(keys.sendGridKey);
-    _this.from_email = new helper.Email('aurkohaldi@gmail.com');
-    _this.subject = subject;
-    _this.body = new helper.Content("text/html", content);
-    _this.recipients = recipients.map(function (r) {
-      return new helper.Email(r.email);
-    });
+    // Enter in Schema format
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Mailer).call(this)); // Client created, can now call 
 
-    _this.addContent(_this.body);
+    _this.setApiKey(keys.sendGridKey); // Set Keys
 
-    _this.addClickTracking();
 
-    _this.addRecipients();
-
+    _this.data = {
+      to: recipients.map(function (r) {
+        return r.email;
+      }),
+      from: 'aurkohaldi@gmail.com',
+      subject: subject,
+      html: content,
+      trackingSettings: {
+        clickTracking: {
+          enable: true,
+          enableText: true
+        }
+      }
+    };
     return _this;
   }
 
   _createClass(Mailer, [{
-    key: "addRecipients",
-    value: function addRecipients() {
-      var personalize = new helper.Personalization();
-      this.recipients.forEach(function (recipient) {
-        return personalize.addTo(recipient);
-      });
-      this.addPersonalization(personalize);
-    }
-  }, {
-    key: "addClickTracking",
-    value: function addClickTracking() {
-      var trackingSettings = new helper.TrackingSettings();
-      var clickTracking = new helper.ClickTracking(true, true);
-      trackingSettings.setClickTracking(clickTracking);
-      this.addTrackingSettings(trackingSettings);
-    }
-  }, {
-    key: "send",
-    value: function send() {
-      var request, response;
-      return regeneratorRuntime.async(function send$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              request = this.sgApi.emptyRequest({
-                method: 'POST',
-                patch: 'v3/mail/send',
-                body: this.toJSON()
-              });
-              response = this.sgApi.API(request);
-              return _context.abrupt("return", response);
+    key: "sendMail",
+    value: function sendMail() {
+      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var content = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+      var cb = arguments.length > 2 ? arguments[2] : undefined;
+      // optionally add any params default 
+      if (typeof content === 'function') cb = content;else if (typeof data === 'function') cb = data; // callback handling
 
-            case 3:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, null, this);
+      if (data.subject || data.recipients || content) {
+        // update whichever is not populated
+        this.data.subject = data.subject ? data.subject : this.data.subject;
+        this.data.to = data.recipients ? data.recipients.map(function (r) {
+          return r.email;
+        }) : this.data.to;
+        this.data.html = data.content ? data.content : this.data.html;
+      } // check if all three are filled, else error
+
+
+      if (!(this.data.subject && this.data.to.length && this.data.html)) // Always going to have them in an array
+        throw new Error("Enter all the required fields: \ndata: { subject: String, recipient(s): String | Array(String) }, \ncontent : String");
+      console.log("debugging", this.data);
+      this.send(this.data, true, cb);
     }
   }]);
 
   return Mailer;
-}(helper.Mail);
+}(MailService);
 
 module.exports = Mailer;

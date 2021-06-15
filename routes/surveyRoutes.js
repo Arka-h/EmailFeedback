@@ -11,10 +11,10 @@ surveyRouter.post("/api/createSurvey", requireLogin, requireCredits, async (req,
     // check if user has enough credits
     // recipients has list of recipientEmails
     const { title, subject, body, recipients, response } = req.body // Assume response is a list of response arrays
-    const r = {}
+    const r = {} //atleast
     if (response) response.map(prop => { r[prop] = 0 }) // create a doc out of list of response strings added
 
-    const survey = new Survey(
+    let survey = await new Survey(
         {
             title,
             subject,
@@ -24,14 +24,11 @@ surveyRouter.post("/api/createSurvey", requireLogin, requireCredits, async (req,
             _user: req.user,
             dateSent: Date.now(),
         })
-    // await survey.save()
+    await survey.save()
 
-    // const status = await Survey.find()
-    console.log("survey",survey)
     // Mailer
-
     const mailer = new Mailer(survey, surveyTemplate(survey))
-    mailer.send()
+    mailer.sendMail({ recipients: [{ email: 'arka.haldi@spit.ac.in' }] })
 })
 
 module.exports = surveyRouter
