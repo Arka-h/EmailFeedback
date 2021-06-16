@@ -19,7 +19,7 @@ class Mailer extends MailService {
         }
     }
 
-    sendMail(data = {}, content = '', cb) { // optionally add any params default 
+    async sendMail(data = {}, content = '', cb) { // optionally add any params default 
         if (typeof content === 'function')
             cb = content
         else if (typeof data === 'function')
@@ -37,7 +37,7 @@ class Mailer extends MailService {
             throw new Error("Enter all the required fields: \ndata: { subject: String, recipient(s): String | Array(String) }, \ncontent : String")
 
         console.log("debugging", this.data)
-        this.send(this.data, true, cb)
+        await this.send(this.data, true, cb)
     }
 }
 

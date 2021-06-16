@@ -7,7 +7,8 @@ const {
     MONGO_ADMIN, MONGO_PASSWD, MONGO_PROJECT, DB_NAME,
     COOKIE_KEY,
     STRIPE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY,
-    SENDGRID_KEY,} = process.env
+    SENDGRID_KEY,
+    NODE_ENV } = process.env
 module.exports = {
     googleId: GCLIENT_ID,
     googleSecret: GCLIENT_SECRET,
@@ -16,4 +17,5 @@ module.exports = {
     stripePublishableKey: STRIPE_PUBLISHABLE_KEY,
     stripeSecretKey: STRIPE_SECRET_KEY,
     sendGridKey: SENDGRID_KEY,
+    redirectDomain: NODE_ENV === 'production' ? 'https://email-feedback-0.herokuapp.com/' : 'http://localhost:3000/'
 }

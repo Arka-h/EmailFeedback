@@ -14,8 +14,11 @@ var surveyTemplate = require('../services/emailTemplates/surveyTemplate'); // We
 // now depricated, use express.json() instead
 
 
+surveyRouter.get('/api/thanks', function (req, res) {
+  res.send('Thanks for voting!');
+});
 surveyRouter.post("/api/createSurvey", requireLogin, requireCredits, function _callee(req, res) {
-  var _req$body, title, subject, body, recipients, response, r, survey, mailer;
+  var _req$body, title, subject, body, recipients, response, r, survey, mailer, user;
 
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
@@ -44,19 +47,37 @@ surveyRouter.post("/api/createSurvey", requireLogin, requireCredits, function _c
 
         case 5:
           survey = _context.sent;
-          _context.next = 8;
+          mailer = new Mailer(survey, surveyTemplate(survey)); // Mailer
+
+          _context.prev = 7;
+          _context.next = 10;
           return regeneratorRuntime.awrap(survey.save());
 
-        case 8:
-          // Mailer
-          mailer = new Mailer(survey, surveyTemplate(survey));
-          mailer.sendMail();
-
         case 10:
+          _context.next = 12;
+          return regeneratorRuntime.awrap(mailer.sendMail());
+
+        case 12:
+          req.user.credits -= 1;
+          _context.next = 15;
+          return regeneratorRuntime.awrap(req.user.save());
+
+        case 15:
+          user = _context.sent;
+          res.send(user);
+          _context.next = 22;
+          break;
+
+        case 19:
+          _context.prev = 19;
+          _context.t0 = _context["catch"](7);
+          res.status(422).send(new Error(_context.t0));
+
+        case 22:
         case "end":
           return _context.stop();
       }
     }
-  });
+  }, null, null, [[7, 19]]);
 });
 module.exports = surveyRouter;

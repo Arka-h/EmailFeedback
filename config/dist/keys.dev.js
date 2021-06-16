@@ -13,7 +13,8 @@ var _process$env = process.env,
     COOKIE_KEY = _process$env.COOKIE_KEY,
     STRIPE_PUBLISHABLE_KEY = _process$env.STRIPE_PUBLISHABLE_KEY,
     STRIPE_SECRET_KEY = _process$env.STRIPE_SECRET_KEY,
-    SENDGRID_KEY = _process$env.SENDGRID_KEY;
+    SENDGRID_KEY = _process$env.SENDGRID_KEY,
+    NODE_ENV = _process$env.NODE_ENV;
 module.exports = {
   googleId: GCLIENT_ID,
   googleSecret: GCLIENT_SECRET,
@@ -21,5 +22,6 @@ module.exports = {
   cookieKey: COOKIE_KEY,
   stripePublishableKey: STRIPE_PUBLISHABLE_KEY,
   stripeSecretKey: STRIPE_SECRET_KEY,
-  sendGridKey: SENDGRID_KEY
+  sendGridKey: SENDGRID_KEY,
+  redirectDomain: NODE_ENV === 'production' ? 'https://email-feedback-0.herokuapp.com/' : 'http://localhost:3000/'
 };

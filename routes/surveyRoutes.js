@@ -6,7 +6,7 @@ const Mailer = require('../services/Mailer')
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate')
 // We need to explicitly wire up body parser, 
 // now depricated, use express.json() instead
-
+surveyRouter.get('/api/thanks', (req, res) => { res.send('Thanks for voting!') })
 surveyRouter.post("/api/createSurvey", requireLogin, requireCredits, async (req, res) => {
     // check if user has enough credits
     // recipients has list of recipientEmails
@@ -24,11 +24,19 @@ surveyRouter.post("/api/createSurvey", requireLogin, requireCredits, async (req,
             _user: req.user,
             dateSent: Date.now(),
         })
-    await survey.save()
 
-    // Mailer
     const mailer = new Mailer(survey, surveyTemplate(survey))
-    mailer.sendMail()
+    // Mailer
+    try {
+        await survey.save()
+        await mailer.sendMail()
+        req.user.credits -= 1
+        const user = await req.user.save()
+        res.send(user)
+    }
+    catch (err) {
+        res.status(422).send(new Error(err))
+    }
 })
 
 module.exports = surveyRouter
