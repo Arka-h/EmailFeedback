@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.handleToken = exports.fetchUser = void 0;
+exports.submitSurvey = exports.handleToken = exports.fetchUser = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -69,3 +69,39 @@ var handleToken = function handleToken(token) {
 };
 
 exports.handleToken = handleToken;
+
+var submitSurvey = function submitSurvey(values, history) {
+  return function _callee3(dispatch) {
+    var res;
+    return regeneratorRuntime.async(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            // actions triggered in component
+            values.recipients = values.recipients.split(',').map(function (s) {
+              return s.trim();
+            });
+            values.response = values.response.split(',').map(function (s) {
+              return s.trim();
+            });
+            _context3.next = 4;
+            return regeneratorRuntime.awrap(_axios["default"].post('/api/createSurvey', values));
+
+          case 4:
+            res = _context3.sent;
+            history.push('/surveys');
+            dispatch({
+              type: _types.FETCH_USER,
+              payload: res.data
+            }); // updates in UI to make after action
+
+          case 7:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    });
+  };
+};
+
+exports.submitSurvey = submitSurvey;

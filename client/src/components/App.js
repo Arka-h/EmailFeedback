@@ -2,11 +2,11 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import NewSurvey from './NewSurvey'
 import Dashboard from './Dashboard'
 import Landing from './Landing'
 import { fetchUser } from '../actions'
 import Header from './Header'
+import SurveyNew from './surveys/SurveyNew'
 
 const App = (props) => {
     const dispatch = useDispatch()
@@ -21,7 +21,7 @@ const App = (props) => {
                     <Header />
                     <Route exact path='/' component={Landing} />
                     <Route exact path='/surveys' component={Dashboard} />
-                    <Route exact path='/surveys/new' component={NewSurvey} />
+                    <Route exact path='/surveys/new' component={SurveyNew} />
                 </div>
             </BrowserRouter>
         </>

@@ -9,7 +9,7 @@ var Users = new mongoose.Schema({
   },
   credits: {
     type: Number,
-    "default": 500
+    "default": 100
   }
 });
 module.exports = mongoose.model('users', Users);

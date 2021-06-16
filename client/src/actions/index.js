@@ -7,7 +7,17 @@ export const fetchUser = () => async (dispatch, prevState) => { // thunk functio
 }
 
 export const handleToken = token => async (dispatch, prevState) => { // thunk function
-    console.log('token',token)
+    console.log('token', token)
     const user = await axios.post('/api/stripe', token)
-    dispatch({ type: FETCH_USER, payload: user.data})
+    dispatch({ type: FETCH_USER, payload: user.data })
+}
+
+export const submitSurvey = (values, history) => async dispatch => { // actions triggered in component
+    values.recipients = values.recipients.split(',').map(s => s.trim())
+    values.response = values.response.split(',').map((s) => s.trim())
+
+    const res = await axios.post('/api/createSurvey', values)
+    
+    history.push('/surveys')
+    dispatch({ type: FETCH_USER, payload: res.data }) // updates in UI to make after action
 }
