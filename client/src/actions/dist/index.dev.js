@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.submitSurvey = exports.handleToken = exports.fetchUser = void 0;
+exports.fetchSurveys = exports.submitSurvey = exports.handleToken = exports.fetchUser = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -105,3 +105,31 @@ var submitSurvey = function submitSurvey(values, history) {
 };
 
 exports.submitSurvey = submitSurvey;
+
+var fetchSurveys = function fetchSurveys() {
+  return function _callee4(dispatch) {
+    var res;
+    return regeneratorRuntime.async(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.next = 2;
+            return regeneratorRuntime.awrap(_axios["default"].get('/api/surveys'));
+
+          case 2:
+            res = _context4.sent;
+            dispatch({
+              type: _types.FETCH_SURVEYS,
+              payload: res.data
+            });
+
+          case 4:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    });
+  };
+};
+
+exports.fetchSurveys = fetchSurveys;

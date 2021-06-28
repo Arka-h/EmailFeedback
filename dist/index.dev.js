@@ -69,4 +69,3 @@ if (process.env.NODE_ENV === 'production') {
 
 var PORT = process.env.PORT || 5000;
 app.listen(PORT); //nodemon index.js
-// http://c2653c8ac90b.ngrok.io
