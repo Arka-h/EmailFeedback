@@ -6,7 +6,7 @@ const { ObjectId } = require('mongoose').Types
 const requireLogin = require('../middlewares/requireLogin')
 const requireCredits = require('../middlewares/requireCredits')
 const Survey = require('../models/Survey')
-const Mailer = require('../services/Mailer')
+const Mailer = require('../services/mailer')
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate')
 // We need to explicitly wire up body parser, 
 // now depricated, use express.json() instead

@@ -41,5 +41,4 @@ class Mailer extends MailService {
     }
 }
 
-
 module.exports = Mailer
