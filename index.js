@@ -44,6 +44,7 @@ if (process.env.NODE_ENV === 'production') {
     // It'll serve up index.html, if route is not understood
     const path = require('path')
     app.get('*', (res, req) => {
+        console.log(res)
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')) // concats it's params--> Absoulte path
     })
 }
